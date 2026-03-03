@@ -1,0 +1,9 @@
+terraform {
+  backend "s3" {
+    bucket         = "tf-state-org-dev-enterpause"
+    key            = "dev/02-eks/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "tf-lock-org-dev"
+    encrypt        = true
+  }
+}

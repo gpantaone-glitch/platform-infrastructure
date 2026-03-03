@@ -1,0 +1,5 @@
+{
+  "Effect": "Allow",
+  "Action": "sts:AssumeRole",
+  "Resource": "arn:aws:iam::078591672268:role/TerraformStateAccessRole"
+}
