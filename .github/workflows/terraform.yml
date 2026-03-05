@@ -20,7 +20,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::<PLATFORM_ACCOUNT_ID>:role/PlatformCIExecutionRole
+          role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
           aws-region: us-east-1
 
       - name: Setup Terraform
