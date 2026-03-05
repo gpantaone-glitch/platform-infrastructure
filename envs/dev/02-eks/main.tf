@@ -1,7 +1,7 @@
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-  	bucket = "tf-state-org-dev-enterpause"
+  	bucket = "tf-state-org-platform"
 	key    = "dev/01-network/terraform.tfstate"
     	region = "us-east-1"
 	}
