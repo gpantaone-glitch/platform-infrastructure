@@ -14,23 +14,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
+          role-to-assume: arn:aws:iam::<PLATFORM_ACCOUNT_ID>:role/PlatformCIExecutionRole
           aws-region: us-east-1
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Init
-        run: terraform init
+      - name: Dev Network
+        run: |
+          cd envs/dev/01-network
+          terraform init
+          terraform apply -auto-approve
 
-      - name: Terraform Plan
-        run: terraform plan
+      - name: Dev EKS
+        run: |
+          cd envs/dev/02-eks
+          terraform init
+          terraform apply -auto-approve
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      - name: Dev Platform
+        run: |
+          cd envs/dev/03-platform
+          terraform init
+          terraform apply -auto-approve
+
+      - name: Dev Observability
+        run: |
+          cd envs/dev/04-observability
+          terraform init
+          terraform apply -auto-approve
