@@ -44,11 +44,28 @@ resource "aws_eks_access_entry" "dev_admin" {
   type          = "STANDARD"
 }
 
+resource "aws_eks_access_entry" "platform_ci" {
+  cluster_name  = module.eks.cluster_name
+  principal_arn = "arn:aws:iam::078591672268:role/PlatformCIExecutionRole"
+
+  type = "STANDARD"
+}
+
 resource "aws_eks_access_policy_association" "dev_admin_policy" {
   cluster_name  = module.eks.cluster_name
   principal_arn = aws_eks_access_entry.dev_admin.principal_arn
   policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
 
+  access_scope {
+    type = "cluster"
+  }
+}
+
+resource "aws_eks_access_policy_association" "platformci_admin_policy" {
+  cluster_name  = module.eks.cluster_name
+  principal_arn = aws_eks_access_entry.platform_ci.principal_arn
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  
   access_scope {
     type = "cluster"
   }
