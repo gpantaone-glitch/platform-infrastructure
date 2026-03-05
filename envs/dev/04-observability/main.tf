@@ -3,7 +3,7 @@ data "terraform_remote_state" "eks" {
 
   config = {
     bucket = "tf-state-org-platform"
-    key    = "dev/04-observability/terraform.tfstate"
+    key    = "dev/03-platform/terraform.tfstate"
     region = "us-east-1"
   }
 }
