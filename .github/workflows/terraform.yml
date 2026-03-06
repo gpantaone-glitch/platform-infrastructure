@@ -32,20 +32,20 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-      - name: Dev EKS
-        run: |
-          cd envs/dev/02-eks
-          terraform init
-          terraform apply -auto-approve
+#      - name: Dev EKS
+#        run: |
+#          cd envs/dev/02-eks
+#          terraform init
+#          terraform apply -auto-approve
 
-      - name: Dev Platform
-        run: |
-          cd envs/dev/03-platform
-          terraform init
-          terraform apply -auto-approve
+ #     - name: Dev Platform
+ #       run: |
+ #         cd envs/dev/03-platform
+ #         terraform init
+ #         terraform apply -auto-approve
 
-      - name: Dev Observability
-        run: |
-          cd envs/dev/04-observability
-          terraform init
-          terraform apply -auto-approve
+ #     - name: Dev Observability
+ #       run: |
+ #         cd envs/dev/04-observability
+ #         terraform init
+ #         terraform apply -auto-approve
