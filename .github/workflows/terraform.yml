@@ -39,11 +39,15 @@ jobs:
 
       - name: Dev terraform apply
         if: github.event.inputs.action == 'apply'
-        run: terraform apply -auto-approve
+        run: |
+          cd envs/dev/01-network
+           terraform apply -auto-approve
 
       - name: Terraform Destroy
         if: github.event.inputs.action == 'destroy'
-        run: terraform destroy -auto-approve
+        run: |
+          cd envs/dev/01-network
+           terraform destroy -auto-approve
 
 #      - name: Dev EKS
 #        run: |
