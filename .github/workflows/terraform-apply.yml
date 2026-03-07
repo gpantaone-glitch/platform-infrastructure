@@ -44,7 +44,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::317976464242:role/terraform-deployer-role
           aws-region: us-east-1
-          chained: true
+          role-chaining: true
 
       - name: Dev Platform
         run: |
