@@ -21,6 +21,18 @@ module "vpc" {
   }
 }
 
+resource "null_resource" "cleanup_vpc_dependencies" {
+
+  triggers = {
+    vpc_id = aws_vpc.main.id
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "bash cleanup.sh ${self.triggers.vpc_id} ${var.aws_region}"
+  }
+}
+
 output "vpc_id" {
   value = module.vpc.vpc_id
 }
