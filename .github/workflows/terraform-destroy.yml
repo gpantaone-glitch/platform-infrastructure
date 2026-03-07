@@ -28,7 +28,8 @@ jobs:
         run: |
           aws eks update-kubeconfig \
               --region us-east-1 \
-              --name org-dev-eks
+              --name org-dev-eks \
+              --role-arn arn:aws:iam::317976464242:role/terraform-deployer-role
 
       - name: Delete User Namespaces
         run: |
