@@ -31,6 +31,26 @@ provider "kubernetes" {
 }
 
 ############################################
+# Allow Terraform Deployer Role to Access EKS
+############################################
+
+resource "aws_eks_access_entry" "terraform_deployer" {
+  cluster_name  = module.eks.cluster_name
+  principal_arn = "arn:aws:iam::317976464242:role/terraform-deployer-role"
+  type          = "STANDARD"
+}
+
+resource "aws_eks_access_policy_association" "terraform_deployer_admin" {
+  cluster_name  = module.eks.cluster_name
+  principal_arn = aws_eks_access_entry.terraform_deployer.principal_arn
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+
+  access_scope {
+    type = "cluster"
+  }
+}
+
+############################################
 # Helm Provider
 ############################################
 
