@@ -1,15 +1,12 @@
 name: Terraform Apply
 
+#on:
+#  push:
+#    branches:
+#      - main
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
-    inputs:
-      action:
-        description: "apply or destroy"
-        required: true
-        default: "apply"
+
 permissions:
   id-token: write
   contents: read
