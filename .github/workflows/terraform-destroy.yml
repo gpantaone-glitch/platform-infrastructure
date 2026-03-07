@@ -24,14 +24,18 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Configure kubectl for EKS
+      - name: Assume Dev Role
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::317976464242:role/terraform-deployer-role
+          aws-region: us-east-1
+          
+      # Configure kubectl to talk to EKS
+      - name: Configure kubectl for EKS
         run: |
           aws eks update-kubeconfig \
-              --region us-east-1 \
-              --name org-dev-eks 
+            --region us-east-1 \
+            --name org-dev-eks
 
       - name: Delete User Namespaces
         run: |
