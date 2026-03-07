@@ -39,6 +39,13 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::317976464242:role/terraform-deployer-role
+          aws-region: us-east-1
+          chained: true
+
       - name: Dev Platform
         run: |
           cd envs/dev/03-platform
