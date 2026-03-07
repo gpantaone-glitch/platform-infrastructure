@@ -67,11 +67,11 @@ jobs:
       #         kubectl delete ns $ns --wait=true
       #     done
 
-      # - name: Configure AWS Credentials (OIDC)
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
-      #     aws-region: us-east-1      
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
+          aws-region: us-east-1      
 
       # - name: Destroy Observability
       #   run: |
