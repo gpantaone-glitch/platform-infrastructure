@@ -38,16 +38,24 @@ jobs:
             --region us-east-1 \
             --name org-dev-eks
 
-      - name: Delete argocd-server ingress
+      - name: Delete ArgoCD LoadBalancer Service
         run: |
           echo "Deleting ArgoCD service"
           kubectl delete svc argocd-server -n argocd --ignore-not-found=true
-          echo "Waiting for service to disappear"
-          while kubectl get svc argocd-server -n argocd >/dev/null 2>&1; do
-            echo "Service still exists, waiting..."
+
+          echo "Waiting for service to disappear..."
+
+          for i in {1..60}; do
+            if ! kubectl get svc argocd-server -n argocd >/dev/null 2>&1; then
+              echo "Service deleted"
+              exit 0
+            fi
+
+            echo "Still deleting... attempt $i"
             sleep 10
           done
-          echo "Service removed"        
+          echo "Timeout waiting for service deletion"
+          exit 1
 
       - name: Delete User Namespaces
         run: |
