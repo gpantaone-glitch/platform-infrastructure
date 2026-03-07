@@ -32,58 +32,58 @@ jobs:
           role-chaining: true
           
       # Configure kubectl to talk to EKS
-      - name: Configure kubectl for EKS
-        run: |
-          aws eks update-kubeconfig \
-            --region us-east-1 \
-            --name org-dev-eks
+      # - name: Configure kubectl for EKS
+      #   run: |
+      #     aws eks update-kubeconfig \
+      #       --region us-east-1 \
+      #       --name org-dev-eks
 
-      - name: Delete ArgoCD LoadBalancer Service
-        run: |
-          echo "Deleting ArgoCD service"
-          kubectl delete svc argocd-server -n argocd --ignore-not-found=true
+      # - name: Delete ArgoCD LoadBalancer Service
+      #   run: |
+      #     echo "Deleting ArgoCD service"
+      #     kubectl delete svc argocd-server -n argocd --ignore-not-found=true
 
-          echo "Waiting for service to disappear..."
+      #     echo "Waiting for service to disappear..."
 
-          for i in {1..60}; do
-            if ! kubectl get svc argocd-server -n argocd >/dev/null 2>&1; then
-              echo "Service deleted"
-              exit 0
-            fi
+      #     for i in {1..60}; do
+      #       if ! kubectl get svc argocd-server -n argocd >/dev/null 2>&1; then
+      #         echo "Service deleted"
+      #         exit 0
+      #       fi
 
-            echo "Still deleting... attempt $i"
-            sleep 10
-          done
-          echo "Timeout waiting for service deletion"
-          exit 1
+      #       echo "Still deleting... attempt $i"
+      #       sleep 10
+      #     done
+      #     echo "Timeout waiting for service deletion"
+      #     exit 1
 
-      - name: Delete User Namespaces
-        run: |
-          kubectl get ns -o jsonpath='{.items[*].metadata.name}' \
-          | tr ' ' '\n' \
-          | grep -vE '^(kube-system|kube-public|kube-node-lease|default|argocd)$' \
-          | while read ns; do
-              echo "Deleting namespace $ns"
-              kubectl delete ns $ns --wait=true
-          done
+      # - name: Delete User Namespaces
+      #   run: |
+      #     kubectl get ns -o jsonpath='{.items[*].metadata.name}' \
+      #     | tr ' ' '\n' \
+      #     | grep -vE '^(kube-system|kube-public|kube-node-lease|default|argocd)$' \
+      #     | while read ns; do
+      #         echo "Deleting namespace $ns"
+      #         kubectl delete ns $ns --wait=true
+      #     done
 
-      - name: Configure AWS Credentials (OIDC)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
-          aws-region: us-east-1      
+      # - name: Configure AWS Credentials (OIDC)
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
+      #     aws-region: us-east-1      
 
-      - name: Destroy Observability
-        run: |
-          cd envs/dev/04-observability
-          terraform init
-          terraform destroy -auto-approve
+      # - name: Destroy Observability
+      #   run: |
+      #     cd envs/dev/04-observability
+      #     terraform init
+      #     terraform destroy -auto-approve
 
-      - name: Destroy Platform
-        run: |
-          cd envs/dev/03-platform
-          terraform init
-          terraform destroy -auto-approve
+      # - name: Destroy Platform
+      #   run: |
+      #     cd envs/dev/03-platform
+      #     terraform init
+      #     terraform destroy -auto-approve
 
       - name: Destroy EKS
         run: |
