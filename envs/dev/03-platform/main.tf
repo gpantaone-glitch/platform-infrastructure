@@ -48,6 +48,9 @@ resource "aws_eks_access_policy_association" "terraform_deployer_admin" {
   access_scope {
     type = "cluster"
   }
+  depends_on = [
+    aws_eks_access_entry.terraform_deployer
+  ]
 }
 
 ############################################
