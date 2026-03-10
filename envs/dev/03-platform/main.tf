@@ -57,7 +57,7 @@ resource "aws_eks_access_policy_association" "terraform_deployer_admin" {
     type = "cluster"
   }
   depends_on = [
-    aws_eks_access_entry.terraform_deployer
+    time_sleep.wait_for_access_entry
   ]
 }
 
