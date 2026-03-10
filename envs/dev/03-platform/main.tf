@@ -40,6 +40,14 @@ resource "aws_eks_access_entry" "terraform_deployer" {
   type          = "STANDARD"
 }
 
+resource "time_sleep" "wait_for_access_entry" {
+  depends_on = [
+    aws_eks_access_entry.terraform_deployer
+  ]
+
+  create_duration = "20s"
+}
+
 resource "aws_eks_access_policy_association" "terraform_deployer_admin" {
   cluster_name  = data.terraform_remote_state.eks.outputs.cluster_name
   principal_arn = aws_eks_access_entry.terraform_deployer.principal_arn
