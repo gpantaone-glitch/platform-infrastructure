@@ -118,6 +118,9 @@ resource "kubernetes_service_account_v1" "alb_sa" {
       "eks.amazonaws.com/role-arn" = aws_iam_role.alb_controller.arn
     }
   }
+depends_on = [
+    aws_eks_access_policy_association.terraform_deployer_admin
+  ]
 }
 
 ############################################
