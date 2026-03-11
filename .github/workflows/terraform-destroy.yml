@@ -31,13 +31,19 @@ jobs:
           aws-region: us-east-1
           role-chaining: true
           
-      # Configure kubectl to talk to EKS
-      # - name: Configure kubectl for EKS
-      #   run: |
-      #     aws eks update-kubeconfig \
-      #       --region us-east-1 \
-      #       --name org-dev-eks
+      #Configure kubectl to talk to EKS
+      - name: Configure kubectl for EKS
+        run: |
+          aws eks update-kubeconfig \
+            --region us-east-1 \
+            --name org-dev-eks
 
+      - name: Remove Kubernetes LoadBalancers
+        run: |
+          kubectl delete svc --all -A --field-selector spec.type=LoadBalancer || true
+          kubectl delete ingress --all -A || true
+          sleep 80 
+          
       # - name: Delete ArgoCD LoadBalancer Service
       #   run: |
       #     echo "Deleting ArgoCD service"
@@ -79,11 +85,11 @@ jobs:
       #     terraform init
       #     terraform destroy -auto-approve
 
-      # - name: Destroy Platform
-      #   run: |
-      #     cd envs/dev/03-platform
-      #     terraform init
-      #     terraform destroy -auto-approve
+      - name: Destroy Platform
+        run: |
+          cd envs/dev/03-platform
+          terraform init
+          terraform destroy -auto-approve
 
       - name: Destroy EKS
         run: |
