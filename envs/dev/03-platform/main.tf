@@ -12,6 +12,13 @@ data "terraform_remote_state" "eks" {
   }
 }
 
+############################################
+# EKS Auth
+############################################
+
+data "aws_eks_cluster_auth" "this" {
+  name = data.terraform_remote_state.eks.outputs.cluster_name
+}
 
 ############################################
 # Kubernetes Provider
@@ -21,15 +28,6 @@ provider "kubernetes" {
   host                   = data.terraform_remote_state.eks.outputs.cluster_endpoint
   cluster_ca_certificate = base64decode(data.terraform_remote_state.eks.outputs.cluster_ca)
   token                  = data.aws_eks_cluster_auth.this.token
-}
-
-
-############################################
-# EKS Auth
-############################################
-
-data "aws_eks_cluster_auth" "this" {
-  name = data.terraform_remote_state.eks.outputs.cluster_name
 }
 
 ############################################
@@ -51,7 +49,6 @@ resource "aws_eks_access_policy_association" "terraform_deployer_admin" {
     type = "cluster"
   }
 }
-
 
 ############################################
 # Helm Provider
