@@ -74,11 +74,11 @@ jobs:
 
 
 #### Uncomment this part
-      # - name: Configure AWS Credentials (OIDC)
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
-      #     aws-region: us-east-1      
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
+          aws-region: us-east-1      
 
       # - name: Destroy Observability
       #   run: |
@@ -86,21 +86,21 @@ jobs:
       #     terraform init
       #     terraform destroy -auto-approve
 
-      # - name: Destroy Platform
-      #   run: |
-      #     cd envs/dev/03-platform
-      #     terraform init
-      #     terraform destroy -auto-approve
+      - name: Destroy Platform
+        run: |
+          cd envs/dev/03-platform
+          terraform init
+          terraform destroy -auto-approve
 
-      # - name: Destroy EKS
-      #   run: |
-      #     cd envs/dev/02-eks
-      #     terraform init
-      #     terraform destroy -auto-approve
+      - name: Destroy EKS
+        run: |
+          cd envs/dev/02-eks
+          terraform init
+          terraform destroy -auto-approve
 
-      # - name: Destroy Network
-      #   run: |
-      #     cd envs/dev/01-network
-      #     terraform init
-      #     terraform destroy -auto-approve
+      - name: Destroy Network
+        run: |
+          cd envs/dev/01-network
+          terraform init
+          terraform destroy -auto-approve
 
