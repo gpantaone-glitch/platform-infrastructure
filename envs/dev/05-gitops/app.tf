@@ -12,7 +12,7 @@ resource "kubernetes_manifest" "sample_app" {
       project = "default"
 
       source = {
-        repoURL        = "https://github.com/example/sample-app"
+        repoURL        = "https://github.com/gpantaone-glitch/platform-workload.git"
         targetRevision = "main"
         path           = "k8s"
       }
