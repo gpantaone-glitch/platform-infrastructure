@@ -167,4 +167,8 @@ resource "helm_release" "argocd" {
   	value = "internet-facing"
 }
  ]
+atomic          = true
+cleanup_on_fail = true
+timeout         = 600
+wait            = true
 }
