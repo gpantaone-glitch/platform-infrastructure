@@ -78,13 +78,19 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
-          aws-region: us-east-1      
+          aws-region: us-east-1   
 
-      # - name: Destroy Observability
-      #   run: |
-      #     cd envs/dev/04-observability
-      #     terraform init
-      #     terraform destroy -auto-approve
+      - name: Dev GitOps
+        run: |
+          cd envs/dev/05-gitops
+          terraform init
+          terraform destroy -auto-approve
+
+      - name: Destroy Observability
+        run: |
+          cd envs/dev/04-observability
+          terraform init
+          terraform destroy -auto-approve
 
       - name: Destroy Platform
         run: |
