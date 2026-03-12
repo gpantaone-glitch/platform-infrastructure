@@ -154,6 +154,7 @@ resource "helm_release" "alb" {
 ##########################################
 
 resource "helm_release" "argocd" {
+  depends_on = [helm_release.alb]
   name       = "argocd"
   namespace  = "argocd"
   create_namespace = true
