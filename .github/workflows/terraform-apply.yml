@@ -50,3 +50,9 @@ jobs:
           cd envs/dev/04-observability
           terraform init
           terraform apply -auto-approve
+
+      - name: Dev GitOps
+        run: |
+          cd envs/dev/05-gitops
+          terraform init
+          terraform apply -auto-approve
