@@ -158,7 +158,7 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
 
-  atomic          = true
+  #atomic          = true
   cleanup_on_fail = true
   timeout         = 600
   wait            = true
