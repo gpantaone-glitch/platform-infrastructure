@@ -29,30 +29,30 @@ jobs:
 
       - name: Dev Network
         run: |
-          cd envs/uat/01-network
+          cd envs/dev/01-network
           terraform init
           terraform apply -auto-approve
 
       - name: Dev EKS
         run: |
-          cd envs/uat/02-eks
+          cd envs/dev/02-eks
           terraform init
           terraform apply -auto-approve
 
       - name: Dev Platform
         run: |
-          cd envs/uat/03-platform
+          cd envs/dev/03-platform
           terraform init
           terraform apply -auto-approve
 
       - name: Dev Observability
         run: |
-          cd envs/uat/04-observability
+          cd envs/dev/04-observability
           terraform init
           terraform apply -auto-approve
 
       - name: Dev GitOps
         run: |
-          cd envs/uat/05-gitops
+          cd envs/dev/05-gitops
           terraform init
           terraform apply -auto-approve
