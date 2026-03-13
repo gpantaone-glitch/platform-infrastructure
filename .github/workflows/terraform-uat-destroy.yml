@@ -36,7 +36,7 @@ jobs:
         run: |
           aws eks update-kubeconfig \
             --region us-east-1 \
-            --name org-uat-eks
+            --name org-dev-eks
 
       - name: Remove Kubernetes LoadBalancers
         run: |
@@ -51,7 +51,7 @@ jobs:
       #     echo "Waiting for service to disappear..."
 
       #     for i in {1..60}; do
-      #       if ! kubectl get svc argocd-server -n argocd >/uat/null 2>&1; then
+      #       if ! kubectl get svc argocd-server -n argocd >/dev/null 2>&1; then
       #         echo "Service deleted"
       #         exit 0
       #       fi
@@ -82,31 +82,31 @@ jobs:
 
       - name: Dev GitOps
         run: |
-          cd envs/uat/05-gitops
+          cd envs/dev/05-gitops
           terraform init
           terraform destroy -auto-approve
 
       - name: Destroy Observability
         run: |
-          cd envs/uat/04-observability
+          cd envs/dev/04-observability
           terraform init
           terraform destroy -auto-approve
 
       - name: Destroy Platform
         run: |
-          cd envs/uat/03-platform
+          cd envs/dev/03-platform
           terraform init
           terraform destroy -auto-approve
 
       - name: Destroy EKS
         run: |
-          cd envs/uat/02-eks
+          cd envs/dev/02-eks
           terraform init
           terraform destroy -auto-approve
 
       - name: Destroy Network
         run: |
-          cd envs/uat/01-network
+          cd envs/dev/01-network
           terraform init
           terraform destroy -auto-approve
 
