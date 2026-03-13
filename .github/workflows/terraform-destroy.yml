@@ -1,4 +1,4 @@
-name: Terraform UAT Destroy
+name: Terraform DEV Destroy
 
 on:
   workflow_dispatch:
