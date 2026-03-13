@@ -40,7 +40,7 @@ module "eks" {
 
 resource "aws_eks_access_entry" "uat_admin" {
   cluster_name  = module.eks.cluster_name
-  principal_arn = "arn:aws:iam::997208471891:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_DevAdmin_06a57f961788697a"
+  principal_arn = "arn:aws:iam::997208471891:role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_UatAdmin_49ba5b6b6a1d1838"
   type          = "STANDARD"
 }
 
