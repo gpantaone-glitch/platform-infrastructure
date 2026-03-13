@@ -27,31 +27,31 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Dev Network
+      - name: Uat Network
         run: |
           cd envs/uat/01-network
           terraform init
           terraform apply -auto-approve
 
-      - name: Dev EKS
+      - name: Uat EKS
         run: |
           cd envs/uat/02-eks
           terraform init
           terraform apply -auto-approve
 
-      - name: Dev Platform
+      - name: Uat Platform
         run: |
           cd envs/uat/03-platform
           terraform init
           terraform apply -auto-approve
 
-      - name: Dev Observability
+      - name: Uat Observability
         run: |
           cd envs/uat/04-observability
           terraform init
           terraform apply -auto-approve
 
-      - name: Dev GitOps
+      - name: Uat GitOps
         run: |
           cd envs/uat/05-gitops
           terraform init

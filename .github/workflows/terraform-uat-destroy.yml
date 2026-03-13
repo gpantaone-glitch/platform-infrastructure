@@ -24,7 +24,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Assume Dev Role
+      - name: Assume Uat Role
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::317976464242:role/terraform-deployer-role
@@ -80,7 +80,7 @@ jobs:
           role-to-assume: arn:aws:iam::078591672268:role/PlatformCIExecutionRole
           aws-region: us-east-1   
 
-      - name: Dev GitOps
+      - name: Uat GitOps
         run: |
           cd envs/uat/05-gitops
           terraform init
