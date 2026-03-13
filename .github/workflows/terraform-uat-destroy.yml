@@ -27,7 +27,7 @@ jobs:
       - name: Assume Uat Role
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::317976464242:role/terraform-deployer-role
+          role-to-assume: arn:aws:iam::997208471891:role/terraform-deployer-role
           aws-region: us-east-1
           role-chaining: true
           
