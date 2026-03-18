@@ -32,46 +32,16 @@ jobs:
           role-chaining: true
           
       #Configure kubectl to talk to EKS
-      - name: Configure kubectl for EKS
-        run: |
-          aws eks update-kubeconfig \
-            --region us-east-1 \
-            --name org-dev-eks
-
-      - name: Remove Kubernetes LoadBalancers
-        run: |
-          kubectl delete svc argocd-server -n argocd || true
-          sleep 80 
-          
-      # - name: Delete ArgoCD LoadBalancer Service
+      # - name: Configure kubectl for EKS
       #   run: |
-      #     echo "Deleting ArgoCD service"
-      #     kubectl delete svc argocd-server -n argocd --ignore-not-found=true
+      #     aws eks update-kubeconfig \
+      #       --region us-east-1 \
+      #       --name org-dev-eks
 
-      #     echo "Waiting for service to disappear..."
-
-      #     for i in {1..60}; do
-      #       if ! kubectl get svc argocd-server -n argocd >/dev/null 2>&1; then
-      #         echo "Service deleted"
-      #         exit 0
-      #       fi
-
-      #       echo "Still deleting... attempt $i"
-      #       sleep 10
-      #     done
-      #     echo "Timeout waiting for service deletion"
-      #     exit 1
-
-      # - name: Delete User Namespaces
+      # - name: Remove Kubernetes LoadBalancers
       #   run: |
-      #     kubectl get ns -o jsonpath='{.items[*].metadata.name}' \
-      #     | tr ' ' '\n' \
-      #     | grep -vE '^(kube-system|kube-public|kube-node-lease|default|argocd)$' \
-      #     | while read ns; do
-      #         echo "Deleting namespace $ns"
-      #         kubectl delete ns $ns --wait=true
-      #     done
-
+      #     kubectl delete svc argocd-server -n argocd || true
+      #     sleep 80 
 
 #### Uncomment this part
       - name: Configure AWS Credentials (OIDC)
