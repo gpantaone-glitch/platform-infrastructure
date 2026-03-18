@@ -32,16 +32,16 @@ jobs:
           role-chaining: true
           
       #Configure kubectl to talk to EKS
-      # - name: Configure kubectl for EKS
-      #   run: |
-      #     aws eks update-kubeconfig \
-      #       --region us-east-1 \
-      #       --name org-dev-eks
+      - name: Configure kubectl for EKS
+        run: |
+          aws eks update-kubeconfig \
+            --region us-east-1 \
+            --name org-dev-eks
 
-      # - name: Remove Kubernetes LoadBalancers
-      #   run: |
-      #     kubectl delete svc argocd-server -n argocd || true
-      #     sleep 80 
+      - name: Remove Kubernetes LoadBalancers
+        run: |
+          kubectl delete svc argocd-server -n argocd || true
+          sleep 30 
 
 #### Uncomment this part
       - name: Configure AWS Credentials (OIDC)
