@@ -41,7 +41,7 @@ jobs:
       - name: Remove Kubernetes LoadBalancers
         run: |
           kubectl delete svc argocd-server -n argocd || true
-          sleep 80 
+          sleep 30 
           
       # - name: Delete ArgoCD LoadBalancer Service
       #   run: |
