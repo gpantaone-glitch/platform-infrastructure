@@ -42,7 +42,7 @@ jobs:
         run: |
           kubectl delete svc argocd-server -n argocd || true
           kubectl delete ingress tns-app -n tns || true
-          sleep 30 
+          sleep 60 
 
 #### Uncomment this part
       - name: Configure AWS Credentials (OIDC)
