@@ -41,6 +41,7 @@ jobs:
       - name: Remove Kubernetes LoadBalancers
         run: |
           kubectl delete svc argocd-server -n argocd || true
+          kubectl delete ingress tns-app -n tns || true
           sleep 30 
 
 #### Uncomment this part
