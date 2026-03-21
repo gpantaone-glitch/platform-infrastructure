@@ -4,7 +4,7 @@ resource "kubernetes_manifest" "sample_app" {
     kind       = "Application"
 
     metadata = {
-      name      = "sample-app"
+      name      = "tns"
       namespace = "argocd"
     }
 
@@ -14,12 +14,12 @@ resource "kubernetes_manifest" "sample_app" {
       source = {
         repoURL        = "https://github.com/gpantaone-glitch/platform-workload.git"
         targetRevision = "main"
-        path           = "k8s"
+        path           = "argocd/dev"
       }
 
       destination = {
         server    = "https://kubernetes.default.svc"
-        namespace = "sample"
+        namespace = "tns"
       }
 
       syncPolicy = {
