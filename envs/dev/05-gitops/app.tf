@@ -1,3 +1,12 @@
+resource "kubernetes_namespace" "tns" {
+  metadata {
+    name = "tns"
+    labels = {
+      name = "tns"
+    }
+  }
+}
+
 resource "kubectl_manifest" "argocd_root_app" {
   yaml_body = <<YAML
 apiVersion: argoproj.io/v1alpha1
