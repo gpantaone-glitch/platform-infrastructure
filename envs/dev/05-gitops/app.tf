@@ -19,7 +19,7 @@ resource "kubernetes_manifest" "sample_app" {
 
       destination = {
         server    = "https://kubernetes.default.svc"
-        namespace = "tns"
+        namespace = "argocd"
       }
 
       syncPolicy = {
