@@ -20,8 +20,8 @@ spec:
       selfHeal: true
 YAML
 
-  depends_on = [
-    helm_release.argocd,
-    kubernetes_namespace.tns
-  ]
+ # depends_on = [
+ #   helm_release.argocd,
+ #   kubernetes_namespace.tns
+ # ]
 }
