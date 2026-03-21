@@ -41,8 +41,11 @@ jobs:
       - name: Remove Kubernetes LoadBalancers
         run: |
           kubectl delete svc argocd-server -n argocd || true
+          sleep 30
+          kubectl delete ns argocd || true
+          sleep 60
           kubectl delete ingress tns-app -n tns || true
-          sleep 60 
+          sleep 20
 
 #### Uncomment this part
       - name: Configure AWS Credentials (OIDC)
